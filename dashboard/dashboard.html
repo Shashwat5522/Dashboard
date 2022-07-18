@@ -1,0 +1,138 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      // Load Charts and the corechart and barchart packages.
+      google.charts.load('current', {
+        'packages':['geochart'],
+      });
+      google.charts.load('current', {'packages':['table']});
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Draw the pie chart and bar chart when Charts is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data1 = google.visualization.arrayToDataTable([
+          ['Country', 'No of Visitors in Hotel'],
+          ['Germany', 200],
+          ['United States', 300],
+          ['Brazil', 400],
+          ['Canada', 500],
+          ['France', 600],
+          ['RU', 700]
+        ]);
+
+        var options = { title:'Countrywise no of customers',
+                       width:470,
+                       height:300,
+                       };
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        chart.draw(data1, options);
+        var data2 = new google.visualization.DataTable();
+        data2.addColumn('string', 'Market segment');
+        data2.addColumn('number', 'Booking in Percentage');
+        data2.addColumn('boolean', 'provide refund');
+        data2.addRows([
+          ['Direct',  {v: 10, f: '10%'}, true],
+          ['Online',   {v:56,   f: '56%'},  false],
+          ['Online TA/TO', {v: 14, f: '14%'}, true],
+          ['Offline TA',   {v: 20,  f: '20%'},  true]
+        ]);
+
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+
+        table.draw(data2, {showRowNumber: true, width: 400, height: 300});
+
+        
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Month');
+        data.addColumn('number', 'No of Customers');
+        data.addRows([
+          ['january', 3],
+          ['february', 1],
+          ['march', 1],
+          ['april', 1],
+          ['may', 2],
+          ['june',4],
+          ['july',5],
+          ['august',13],
+          ['september',12],
+          ['october',12],
+          ['november',13],
+          ['december',16]
+        ]);
+
+        var piechart_options = {title:'Pie Chart: MonthWise customer visit to hotel',
+                       width:400,
+                       height:300};
+        var piechart = new google.visualization.PieChart(document.getElementById('piechart_div'));
+        piechart.draw(data, piechart_options);
+
+        var barchart_options = {title:'Barchart: MonthWise customer visit to hotel',
+                       width:400,
+                       height:300,
+                       legend: 'none'};
+        var barchart = new google.visualization.BarChart(document.getElementById('barchart_div'));
+        barchart.draw(data, barchart_options);
+
+        var Ddata = google.visualization.arrayToDataTable([
+          ['ArrivalDay', 'No of Customers'],
+          ['Sunday',     4502],
+          ['Monday',      3322],
+          ['Tuesday',  4432],
+          ['Wednesday', 1342],
+          ['ThursDay',    2317],
+          ['Friday',3365],
+          ['Saturday',3360]
+
+          
+        ]);
+        var options = {
+          title: 'Customer Arrivals based on days',
+          pieHole: 0.4,
+        };
+
+        var Dchart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        Dchart.draw(Ddata, options);
+
+        
+
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Booking', ],
+          ['2004',  1000,      ],
+          ['2005',  1170,      ],
+          ['2006',  3660,      ],
+          ['2007',  11030,      ],
+          ['2008',652]
+        ]);
+
+        var options = {
+          title: 'Year wise  booking',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+
+      }
+    </script>
+  </head>
+<body>
+    <!--Table and divs that hold the pie charts-->
+    <table class="columns">
+      <tr>
+        <td><div id="piechart_div" style="border: 1px solid #ccc"></div></td>
+        <td><div id="barchart_div" style="border: 1px solid #ccc"></div></td>
+        <td><div id="regions_div" style="border: 1px solid #ccc"></div></td>
+        <td><div id="table_div" style="border: 1px solid #ccc; position:absolute;left:0px;top:325px;"></div></td>
+        <td><div id="donutchart"style="border: 1px solid #ccc; position:absolute;left:415px;top:325px;height:300px"></div> </td>
+        <td><div id="curve_chart" style="border: 1px solid #ccc; position: absolute;left: 830px;top:325px;height:300px;width:465px"></div></td>
+      </tr>
+    </table>
+  </body>
+</html>
